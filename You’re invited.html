@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>You’re invited</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#ff9ebb;--paper:#fffefc;--ink:#2b0a1e;--muted:#6b3a55;--edge:#2b0a1e;--hot:#e0194f;--on-hot:#fff;--sun:#ffd23f;--heart:#fff;color-scheme:light;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#2b0a1e;--paper:#3d1431;--ink:#ffe8f0;--muted:#e8b4c8;--edge:#ff9ebb;--hot:#ff6b93;--on-hot:#2b0a1e;--heart:#ff6b93;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#2b0a1e;--paper:#3d1431;--ink:#ffe8f0;--muted:#e8b4c8;--edge:#ff9ebb;--hot:#ff6b93;--on-hot:#2b0a1e;--heart:#ff6b93;color-scheme:dark}
+html{height:100%;background:var(--bg);scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;min-height:100%;display:grid;place-items:center;padding:44px 18px 28px;font-family:"Bricolage Grotesque",system-ui,sans-serif;color:var(--ink);background:var(--bg);overflow-x:hidden}
+.bg{position:fixed;inset:0;overflow:hidden;pointer-events:none}
+.bg i{position:absolute;bottom:-60px;font-style:normal;color:var(--heart);opacity:.3;animation:rise linear infinite}
+@keyframes rise{to{transform:translateY(-120vh) rotate(30deg)}}
+.card{position:relative;z-index:1;width:min(100%,520px);background:var(--paper);border:3px solid var(--edge);border-radius:24px;box-shadow:9px 9px 0 var(--edge);padding:46px 28px 30px;animation:pop .6s cubic-bezier(.3,1.5,.5,1) backwards}
+@keyframes pop{from{transform:scale(.88) rotate(-2deg);opacity:0}}
+.sticker{position:absolute;top:-24px;left:22px;rotate:-6deg;background:var(--sun);color:#2b0a1e;font:700 1.4rem/1 Caveat,"Comic Sans MS",cursive;padding:8px 16px;border:3px solid var(--edge);border-radius:10px;box-shadow:3px 3px 0 var(--edge)}
+.tooth{position:absolute;top:-30px;right:22px;font-size:2.7rem;line-height:1;rotate:9deg;filter:drop-shadow(3px 3px 0 var(--edge));user-select:none}
+.tooth.wig{animation:wig .6s ease}
+@keyframes wig{20%{rotate:-14deg;translate:0 -8px}45%{rotate:22deg}70%{rotate:-6deg;translate:0 -3px}}
+.to{font:700 1.6rem/1 Caveat,"Comic Sans MS",cursive;margin:0 0 8px;color:var(--hot)}
+h1{font-size:clamp(2.3rem,9vw,3.5rem);font-weight:800;line-height:1;letter-spacing:-.03em;margin:0 0 16px}
+.sub{color:var(--muted);line-height:1.5;margin:0 0 28px;max-width:36ch}
+.row{display:flex;flex-wrap:wrap;gap:16px;align-items:center;min-height:62px}
+button{font:700 1.05rem/1.1 "Bricolage Grotesque",system-ui,sans-serif;color:var(--ink);background:var(--paper);border:3px solid var(--edge);border-radius:14px;padding:14px 22px;max-width:100%;box-shadow:4px 4px 0 var(--edge);cursor:pointer;transform:scale(var(--s,1));touch-action:manipulation;
+transition:transform .35s cubic-bezier(.3,1.6,.5,1),translate .12s,box-shadow .12s,left .45s cubic-bezier(.3,1.4,.5,1),top .45s cubic-bezier(.3,1.4,.5,1),opacity .5s}
+button:hover{translate:-1px -1px;box-shadow:5px 5px 0 var(--edge)}
+button:active{translate:3px 3px;box-shadow:1px 1px 0 var(--edge)}
+button:focus-visible{outline:3px solid var(--sun);outline-offset:3px}
+#yes{background:var(--hot);color:var(--on-hot)}
+.slot{display:inline-block}
+.slot.gone{width:0;margin-left:-16px}
+#no{white-space:nowrap}
+#no.loose{position:fixed;z-index:5;margin:0;max-width:none}
+#no.bye{opacity:0;pointer-events:none}
+.mood{font:600 1.35rem/1.15 Caveat,"Comic Sans MS",cursive;color:var(--ink);min-height:2.4em;margin:26px 0 0;rotate:-1deg}
+.plan{margin:0 0 20px;border-top:2px dashed var(--edge)}
+.plan div{display:flex;gap:14px;padding:13px 0;border-bottom:2px dashed var(--edge)}
+.plan dt{flex:0 0 4.2rem;font-weight:800}
+.plan dd{margin:0;color:var(--muted);line-height:1.4}
+.cf{position:fixed;top:-40px;z-index:10;pointer-events:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(120vh) rotate(360deg)}}
+@media (max-width:420px){.card{box-shadow:6px 6px 0 var(--edge);padding:44px 22px 26px}}
+@media (prefers-reduced-motion:reduce){.bg i,.card,.tooth.wig{animation:none}button{transition:none}.cf{animation-duration:1s!important}}
+</style>
+</head>
+<body>
+<div class="bg" id="bg" aria-hidden="true"></div>
+<main class="card">
+  <span class="sticker">for you ♥</span>
+  <span class="tooth" id="tooth" aria-hidden="true">🦷</span>
+  <section id="ask">
+    <p class="to" id="to" hidden></p>
+    <h1>Will you go on a date with me?</h1>
+    <p class="sub">Dinner, bad jokes, and a dessert your future patients would never approve of. I’ll take care of everything else.</p>
+    <div class="row">
+      <button id="yes" type="button">Yes, I’d love to</button>
+      <span class="slot" id="slot"><button id="no" type="button">No</button></span>
+    </div>
+    <p class="mood" id="mood" aria-live="polite">Take your time. This won’t hurt a bit.</p>
+  </section>
+  <section id="yay" hidden>
+    <h1>It’s a date.</h1>
+    <p class="sub">You just made my whole week. Here’s the plan:</p>
+    <dl class="plan">
+      <div><dt>When</dt><dd id="when"></dd></div>
+      <div><dt>Where</dt><dd id="where"></dd></div>
+      <div><dt>Wear</dt><dd id="wear"></dd></div>
+      <div><dt>Rx</dt><dd>One evening of dinner, laughter, and zero cavities.</dd></div>
+    </dl>
+    <p class="mood" id="sign"></p>
+  </section>
+</main>
+<script>
+// Edit these to personalise the invitation
+const CONFIG = {
+  to: "",
+  from: "",
+  when: "Saturday, 7:00 PM",
+  where: "A surprise. The food will be good, I promise.",
+  wear: "Whatever makes you feel great. Bring a jacket."
+};
+
+const NO  = ["No","Are you sure?","Really?","Think again","Pretty please?","Worse than a root canal","I’ll bring snacks","I’ll floss, I promise","😢","…","Fine, no","Bye"];
+const YES = ["Yes, I’d love to","Yes, obviously","Say yes already","YES!","Doctor’s orders: yes","You want to!","YES YES YES","Yes, take me out","Yes, with a smile 😁","Okay, yes!","YES 💖","Yes, finally!"];
+const MOOD = ["Oops, the No button slipped. Try again?","It seems allergic to being clicked.","Honestly, it’s faster than my WiFi.","Dentist’s advice: Yes is the healthy choice.","The Yes button brushes twice a day. 🪥","I promise good food and better company.","Dessert is on me. You may inspect my teeth afterwards.","The No button is getting tired…","It has a family to get back to.","Last chance for the No button.","Any second now…"];
+const BYE = "The No button has been extracted. Only one option remains. 🦷";
+
+const $ = s => document.querySelector(s);
+const yes = $("#yes"), no = $("#no"), slot = $("#slot"), mood = $("#mood");
+let n = 0, last = 0, done = false, gone = false;
+const tooth = $("#tooth");
+function wig() { tooth.classList.remove("wig"); void tooth.offsetWidth; tooth.classList.add("wig"); }
+
+if (CONFIG.to) { $("#to").hidden = false; $("#to").textContent = "Dear " + CONFIG.to + ","; }
+$("#when").textContent = CONFIG.when;
+$("#where").textContent = CONFIG.where;
+$("#wear").textContent = CONFIG.wear;
+$("#sign").textContent = CONFIG.from ? "— " + CONFIG.from + " ♥" : "See you soon, future Dr. ♥";
+
+// Drifting hearts in the background
+for (let i = 0; i < 16; i++) {
+  const h = document.createElement("i");
+  h.textContent = i % 4 === 0 ? "🦷" : i % 3 ? "♥" : "♡";
+  h.style.cssText = `left:${Math.random()*100}%;font-size:${14+Math.random()*30}px;animation-duration:${9+Math.random()*10}s;animation-delay:${-Math.random()*16}s`;
+  $("#bg").append(h);
+}
+
+const hit = (x, y, w, h, r, m) => x < r.right + m && x + w > r.left - m && y < r.bottom + m && y + h > r.top - m;
+
+function dodge() {
+  const t = performance.now();
+  if (done || gone || t - last < 260) return;
+  last = t;
+  wig();
+  if (!no.classList.contains("loose")) {
+    const r = no.getBoundingClientRect();
+    slot.style.width = r.width + "px";
+    no.style.left = r.left + "px";
+    no.style.top = r.top + "px";
+    no.classList.add("loose");
+    slot.classList.add("gone");
+    void no.offsetWidth;
+  }
+  n++;
+  if (n >= NO.length) {
+    gone = true;
+    no.classList.add("bye");
+    yes.textContent = YES[YES.length - 1];
+    mood.textContent = BYE;
+    return;
+  }
+  no.textContent = NO[n];
+  yes.textContent = YES[n];
+  mood.textContent = MOOD[Math.min(n - 1, MOOD.length - 1)];
+  yes.style.setProperty("--s", Math.min(1 + n * 0.03, 1.25));
+  no.style.setProperty("--s", Math.max(1 - n * 0.035, 0.65));
+
+  const W = Math.min(innerWidth, document.documentElement.clientWidth), H = Math.min(innerHeight, document.documentElement.clientHeight), w = no.offsetWidth, h = no.offsetHeight;
+  const yr = yes.getBoundingClientRect(), cur = no.getBoundingClientRect();
+  let x, y, k = 0;
+  do {
+    x = 12 + Math.random() * Math.max(0, W - w - 24);
+    y = 56 + Math.random() * Math.max(0, H - h - 112);
+    k++;
+  } while (k < 40 && (hit(x, y, w, h, yr, 24) || Math.hypot(x - cur.left, y - cur.top) < Math.min(180, W / 3)));
+  no.style.left = x + "px";
+  no.style.top = y + "px";
+}
+
+// If the window is resized or rotated, pull the button back into view
+function keepOnScreen() {
+  if (!no.classList.contains("loose") || gone) return;
+  const W = Math.min(innerWidth, document.documentElement.clientWidth), H = Math.min(innerHeight, document.documentElement.clientHeight);
+  no.style.left = Math.min(Math.max(12, parseFloat(no.style.left)), Math.max(12, W - no.offsetWidth - 12)) + "px";
+  no.style.top = Math.min(Math.max(56, parseFloat(no.style.top)), Math.max(56, H - no.offsetHeight - 56)) + "px";
+}
+addEventListener("resize", keepOnScreen);
+
+// Desktop: it runs away as the cursor gets close
+addEventListener("pointermove", e => {
+  if (e.pointerType !== "mouse" || done || gone) return;
+  const r = no.getBoundingClientRect(), m = 40;
+  if (e.clientX > r.left - m && e.clientX < r.right + m && e.clientY > r.top - m && e.clientY < r.bottom + m) dodge();
+});
+// Touch screens: it runs away the moment it’s pressed
+no.addEventListener("pointerdown", e => { e.preventDefault(); dodge(); });
+// Keyboard users get the same treatment
+no.addEventListener("click", e => { e.preventDefault(); dodge(); });
+
+yes.addEventListener("click", () => {
+  if (done) return;
+  done = true;
+  $("#ask").hidden = true;
+  wig();
+  $("#yay").hidden = false;
+  const E = ["💖","🦷","💕","🪥","🌹","😁","✨","🥂"];
+  for (let i = 0; i < 70; i++) {
+    const s = document.createElement("span");
+    s.className = "cf";
+    s.textContent = E[i % E.length];
+    s.style.cssText = `left:${Math.random()*100}vw;font-size:${16+Math.random()*22}px;animation-duration:${2.5+Math.random()*2.5}s;animation-delay:${Math.random()*0.8}s`;
+    document.body.append(s);
+    setTimeout(() => s.remove(), 6500);
+  }
+});
+</script>
+</body>
+</html>
